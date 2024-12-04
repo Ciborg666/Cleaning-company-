@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="wrapper">
+        
+            <h1>Регистрация</h1>
+        
+        <form  id="form-registr">
+            
+                
+                <input type="text" placeholder="Логин" name="username" required class="input-pl">
+                
+                
+                <input type="password" placeholder="Пароль" name="password" required class="input-pl">
+                
+                
+                <input type="text" placeholder="ФИО" name="fio" required class="input-pl">
+               
+                
+                <input type="tel" placeholder="Телефон" name="phone" required class="input-pl">
+            
+                
+                <input type="email" placeholder="Email" name="email" required class="input-pl">
+                
+                
+                <button type="submit" class="registr-button">Зарегистрироваться</button>
+                
+            
+        </form>
+        <div id="message" style="color:white;"></div> 
+        <p>Уже есть аккаунт? <a href="login.html">Войти</a></p>
+    </div>
+    <script>
+        document.getElementById('form-registr').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const password = document.querySelector('input[name="password"]').value.trim();
+            const username = document.querySelector('input[name="username"]').value.trim();
+            const fio = document.querySelector('input[name="fio"]').value.trim();
+            const phone = document.querySelector('input[name="phone"]').value.trim();
+            const email = document.querySelector('input[name="email"]').value.trim();
+            
+            if (password !== '' && username !== '' && fio !== '' && phone !== '' && email !== '') {
+                const userData = { fio, phone, email, password };
+                
+                localStorage.setItem(username, JSON.stringify(userData)); 
+                document.getElementById('message').textContent = 'Вы зарегистрированы'; 
+                
+                
+                    window.location.href = 'login.html'; 
+                
+            } 
+        });
+    </script>
+</body>
+</html>

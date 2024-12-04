@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        
+        <h1>Авторизация</h1>
+        
+        <form class="form" id="form-registr">
+            
+            <input type="text" placeholder="Логин" name="username" required class="input-pl">
+            <input type="password" placeholder="Пароль" name="password" required class="input-pl">
+            
+            <button type="submit" class="registr-button">Войти</button>
+            
+        
+           
+        </form>
+        <div class="message" id="message"></div>
+    </div>
+    <script>
+        document.getElementById('form-registr').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const password = document.querySelector('input[name="password"]').value.trim();
+            const username = document.querySelector('input[name="username"]').value.trim();
+            
+            const userData = localStorage.getItem(username); 
+            if (userData) {
+                const parsedData = JSON.parse(userData);
+                if (parsedData.password === password) {
+                    window.location.href = 'index.html'; 
+                } else {
+                    document.getElementById('message').textContent = 'Неверный пароль.';
+                }
+            } else {
+                document.getElementById('message').textContent = 'Пользователь не найден.';
+            }
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        
+        <h1 class="registr-h1">Авторизация администратора</h1>
+        
+        <form class="form" id="form-registr">
+            
+            <input type="text" placeholder="Логин" name="username" required class="input-pl">
+            <input type="password" placeholder="Пароль" name="password" required class="input-pl">
+            
+            <button type="submit" class="registr-button">Войти</button>
+            
+        
+           
+        </form>
+        <div class="message" id="message"></div>
+    </div>
+    <script>
+        document.getElementById('form-registr').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const password = document.querySelector('input[name="password"]').value.trim();
+            const username = document.querySelector('input[name="username"]').value.trim();
+            
+            if (password ===  'password' && username === 'adminka' ) {
+                    window.location.href = 'admin.html';
+                    } 
+                    else{
+                        document.getElementById('message').textContent = 'Неверный логин или пароль';
+                    }
+                   
+            
+             
+        });
+    </script>
+    
+</body>
+</html>

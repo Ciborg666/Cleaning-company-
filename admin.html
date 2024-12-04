@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        
+            <h1 class="registr-h1">Список заявок</h1>
+        
+        <ul id="list-recuest" class="list-recuest"></ul> 
+    </div>
+    <script>
+        const requests = JSON.parse(localStorage.getItem('requests')) || [];
+        const requestList = document.getElementById('list-recuest');
+
+        requests.forEach((request, index) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${request.fullName} - ${request.address} - ${request.date} ${request.time} - Услуга: ${request.services} - Способ оплаты: ${request.pay} - Статус: ${request.status}`;
+
+            // Кнопки для управления заявками
+            const confirmButton = document.createElement('button');
+            confirmButton.textContent = 'Подтвердить';
+            confirmButton.onclick = () => {
+                request.status = 'Услуга оказана';
+                localStorage.setItem('requests', JSON.stringify(requests));
+                window.location.reload(); // Обновляем страницу
+            };
+
+            const declineButton = document.createElement('button');
+            declineButton.textContent = 'Отклонить';
+            declineButton.onclick = () => {
+                const reason = prompt('Укажите причину отклонения:');
+                if (reason) {
+                    request.status = 'Услуга отменена';
+                    request.declineReason = reason; // Сохраняем причину отклонения
+                    localStorage.setItem('requests', JSON.stringify(requests));
+                    window.location.reload(); // Обновляем страницу
+                }
+            };
+
+            const statusDisplay = document.createElement('span');
+            statusDisplay.textContent = ` (Причина отклонения: ${request.declineReason || 'Нет'})`;
+
+            listItem.appendChild(confirmButton);
+            listItem.appendChild(declineButton);
+            listItem.appendChild(statusDisplay);
+            requestList.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>

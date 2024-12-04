@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    
+    background-image: url(fon.jfif);
+    padding: 200px 20px;
+}
+.wrapper{
+    
+    
+    max-width: 700px;
+    background: transparent;
+    border: 2px solid rgb(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgb(0, 0, 0, .2);
+    border-radius: 20px;
+    /*height: 700px;
+    width: 600px;*/
+    margin: auto;
+    padding: 20px;
+}
+
+.input-pl{
+    
+    background: transparent;
+    border: 2px solid rgb(255, 255, 255, .4);
+    backdrop-filter: blur(20px);
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+   
+}
+.input-pl::placeholder{
+    color: black;
+    font-weight: bold;
+}
+.input-pl:focus{
+    outline: none;
+    
+}
+.form{
+    
+    justify-content: center;
+}
+
+.registr-button{
+    border-radius: 20px;
+    background: transparent;
+    border: 2px solid rgb(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.registr-button:hover{
+    background-color: rgb(255, 255, 255, .2);
+}
+
+.list-recuest{
+    justify-content: center;
+    list-style: none;
+}
+h1{
+    text-align: center;  
+    margin-bottom: 20px;
+}

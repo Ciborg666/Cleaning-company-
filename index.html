@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявка</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        
+            <h1 class="registr-h1">Заявка</h1>
+        
+        <form class="form" id="form-registr">
+            
+                <input type="text" id="address" placeholder="Ваш адрес" name="addres" required class="input-pl">
+                <input type="text" id="fio" placeholder="ФИО" name="fio" required class="input-pl">
+                <input type="date" id="date" name="date" required class="input-pl">
+                <input type="time" id="time" name="time" required class="input-pl">
+                <select id="services" name="services" class="input-pl" required>
+                    <option value="">Выберите услугу</option>
+                    <option value="Общий клининг">Общий клининг</option>
+                    <option value="Послестроительная уборка">Послестроительная уборка</option>
+                    <option value="Химчистка ковров и мебели">Химчистка ковров и мебели</option>
+                    <option value="Генеральная уборка">Генеральная уборка</option>
+                </select>
+                <select id="pay" name="pay" class="input-pl" required>
+                    <option value="">Выберите способ оплаты</option>
+                    <option value="Наличные">Наличные</option>
+                    <option value="Банковская карта">Банковская карта</option>
+                </select>
+                
+                    <button type="submit" id="button" class="registr-button">Оставить заявку</button>
+                
+            
+        </form>
+        <ul id="list-recuest" class="list-recuest"></ul> 
+    </div>
+    <script>
+         // Функция для отображения заявок
+         function displayRequests() {
+            const requests = JSON.parse(localStorage.getItem('requests')) || [];
+            const requestList = document.getElementById('list-recuest');
+            requestList.innerHTML = ''; // Очищаем текущий список
+
+            requests.forEach(request => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${request.fullName}, ${request.address}, ${request.date}, ${request.time}, ${request.services}, ${request.pay}, статус: ${request.status}`;
+                requestList.appendChild(listItem);
+            });
+        }
+
+        // Отображаем заявки при загрузке страницы
+        displayRequests();
+
+        document.getElementById('form-registr').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const fullName = document.getElementById('fio').value;
+            const address = document.getElementById('address').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const services = document.getElementById('services').value;
+            const pay = document.getElementById('pay').value;
+
+            // Создаем объект заявки
+            const requestData = {
+                fullName,
+                address,
+                date,
+                time,
+                services,
+                pay,
+                status: "Новая заявка" // Добавляем статус
+            };
+
+            // Получаем текущие заявки из локального хранилища
+            const requests = JSON.parse(localStorage.getItem('requests')) || [];
+            requests.push(requestData); // Добавляем новую заявку
+
+            // Сохраняем обновленный список заявок в локальном хранилище
+            localStorage.setItem('requests', JSON.stringify(requests));
+
+            // Обновляем отображение заявок
+            displayRequests();
+
+            // Очищаем форму
+            document.getElementById('form-registr').reset();
+        });
+    </script>
+</body>
+</html>
+
